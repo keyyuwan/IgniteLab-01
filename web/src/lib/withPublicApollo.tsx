@@ -10,10 +10,7 @@ import { GetServerSidePropsContext, NextPage } from "next";
 
 export type ApolloClientContext = GetServerSidePropsContext;
 
-// Cada página que precisar utilizar o apollo, envolve por esse HOC
-
-// HOC - High Order Component
-export const withApollo = (Component: NextPage) => {
+export const withPublicApollo = (Component: NextPage) => {
   return function Provider(props: any) {
     return (
       <ApolloProvider client={getApolloClient(undefined, props.apolloState)}>
@@ -28,7 +25,7 @@ export function getApolloClient(
   ssrCache?: NormalizedCacheObject
 ) {
   const httpLink = createHttpLink({
-    uri: "http://localhost:3000/api",
+    uri: "http://localhost:3332/graphql",
     fetch,
   });
 
